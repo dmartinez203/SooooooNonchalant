@@ -75,21 +75,22 @@
     }
     .side-photo-container {
       position: absolute;
-      right: -320px;
+      right: -300px;
       top: 50%;
       transform: translateY(-50%);
       display: none;
       pointer-events: none;
+      z-index: 5;
     }
     .side-media {
       display: block;
-      width: min(280px, 25vw);
+      width: 250px;
       aspect-ratio: 4 / 3;
       border-radius: 12px;
       object-fit: cover;
-      box-shadow: none;
-      border: none;
-      background: transparent;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 3px solid #fff;
+      background: #fff;
     }
     .media.pop { transform: scale(1.01); filter: saturate(1.05); }
     .message {
@@ -249,21 +250,21 @@
         text: 'This could be us',
         sideMedia: 'IMG_4522.JPG',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-220px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
         replaceMain: false
       },
       {
         text: 'What about this?',
         sideMedia: 'IMG_2592.png',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-220px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
         replaceMain: false
       },
 {
         text: 'Last Chance',
         sideMedia: 'IMG_2592.png',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-220px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
         replaceMain: false
       }
     ];
