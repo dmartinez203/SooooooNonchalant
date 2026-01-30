@@ -28,11 +28,12 @@
       color: var(--text);
       font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
       padding: 24px;
+      overflow-x: hidden;
     }
     .card {
       position: relative;
-      width: auto;
-      max-width: 1600px;
+      width: 100%;
+      max-width: 1200px;
       background: transparent;
       border-radius: 0;
       box-shadow: none;
@@ -62,8 +63,8 @@
       justify-content: center;
     }
     .media {
-      width: 800px;
-      max-width: 90vw;
+      width: 100%;
+      max-width: min(700px, 85vw);
       aspect-ratio: 4 / 3;
       border-radius: 28px;
       object-fit: cover;
@@ -74,7 +75,7 @@
     }
     .side-photo-container {
       position: absolute;
-      right: -700px;
+      right: -450px;
       top: 50%;
       transform: translateY(-50%);
       display: none;
@@ -82,7 +83,7 @@
     }
     .side-media {
       display: block;
-      width: min(450px, 38vw);
+      width: min(350px, 30vw);
       aspect-ratio: 4 / 3;
       border-radius: 18px;
       object-fit: cover;
