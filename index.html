@@ -75,7 +75,7 @@
     }
     .side-photo-container {
       position: absolute;
-      right: -50px;
+      right: -20px;
       top: 50%;
       transform: translateY(-50%);
       display: none;
@@ -149,10 +149,10 @@
     }
     .flood-image {
       position: fixed;
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 8px;
       animation: floatIn 0.5s ease forwards;
       z-index: 1;
     }
@@ -383,12 +383,12 @@
         img.src = images[Math.floor(Math.random() * images.length)];
         
         // Random position on screen
-        img.style.left = Math.random() * (window.innerWidth - 150) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+        img.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 100) + 'px';
         
         document.body.appendChild(img);
         count++;
-      }, 350); // Add new image every 350ms
+      }, 200); // Add new image every 200ms
     }
 
     function startYayImageFlood() {
@@ -417,12 +417,12 @@
         img.src = images[Math.floor(Math.random() * images.length)];
         
         // Random position on screen
-        img.style.left = Math.random() * (window.innerWidth - 150) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+        img.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 100) + 'px';
         
         document.body.appendChild(img);
         count++;
-      }, 350); // Add new image every 350ms
+      }, 200); // Add new image every 200ms
     }
   </script>
 </body>
