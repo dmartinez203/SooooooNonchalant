@@ -43,9 +43,9 @@
     }
     .title {
       font-family: 'Playfair Display', 'Space Grotesk', serif;
-      font-size: clamp(48px, 7vw, 64px);
+      font-size: clamp(28px, 5vw, 42px);
       text-align: center;
-      margin: 0 0 26px;
+      margin: 0 0 20px;
       letter-spacing: -0.55px;
     }
     .media-wrap {
@@ -64,12 +64,12 @@
     }
     .media {
       width: 100%;
-      max-width: min(700px, 85vw);
+      max-width: min(500px, 80vw);
       aspect-ratio: 4 / 3;
-      border-radius: 28px;
+      border-radius: 20px;
       object-fit: cover;
       box-shadow: 0 22px 64px rgba(0,0,0,0.12);
-      border: 7px solid #fff3f7;
+      border: 5px solid #fff3f7;
       background: #fff3f7;
       transition: transform 240ms ease, filter 240ms ease;
     }
@@ -83,9 +83,9 @@
     }
     .side-media {
       display: block;
-      width: min(350px, 30vw);
+      width: min(280px, 25vw);
       aspect-ratio: 4 / 3;
-      border-radius: 18px;
+      border-radius: 12px;
       object-fit: cover;
       box-shadow: none;
       border: none;
@@ -108,9 +108,9 @@
     }
     button {
       border: none;
-      border-radius: 20px;
-      padding: 20px 38px;
-      font-size: 24px;
+      border-radius: 16px;
+      padding: 14px 28px;
+      font-size: 18px;
       font-weight: 800;
       cursor: pointer;
       color: white;
@@ -123,7 +123,7 @@
     .no { background: var(--no); }
     .arrow {
       position: absolute;
-      font-size: 120px;
+      font-size: 60px;
       right: 14%;
       bottom: 92px;
       transform: rotate(-12deg);
@@ -168,7 +168,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 72px;
+      font-size: 48px;
       font-weight: 900;
       color: #ff4d6d;
       text-shadow: 0 4px 20px rgba(255, 77, 109, 0.5);
@@ -182,7 +182,7 @@
     .footer-note {
       text-align: center;
       margin-top: 18px;
-      font-size: 32px !important;
+      font-size: 16px !important;
       color: #6d4b56;
       opacity: 0.88;
       position: relative;
@@ -347,9 +347,9 @@
 
       // Always grow Yes button
       yesClickCount += 1;
-      const yesFont = Math.min(24 + yesClickCount * 15);
-      const yesPadY = Math.min(20 + yesClickCount * 10);
-      const yesPadX = Math.min(38 + yesClickCount * 10);
+      const yesFont = Math.min(18 + yesClickCount * 8);
+      const yesPadY = Math.min(14 + yesClickCount * 6);
+      const yesPadX = Math.min(28 + yesClickCount * 6);
       yesButton.style.fontSize = `${yesFont}px`;
       yesButton.style.padding = `${yesPadY}px ${yesPadX}px`;
       
