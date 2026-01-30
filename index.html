@@ -75,7 +75,7 @@
     }
     .side-photo-container {
       position: absolute;
-      right: -300px;
+      right: -150px;
       top: 50%;
       transform: translateY(-50%);
       display: none;
@@ -250,21 +250,21 @@
         text: 'This could be us',
         sideMedia: 'IMG_4522.JPG',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-80px', bottom: '-30px', rotate: '5deg', translate: '' },
         replaceMain: false
       },
       {
         text: 'What about this?',
         sideMedia: 'IMG_2592.png',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-80px', bottom: '-30px', rotate: '5deg', translate: '' },
         replaceMain: false
       },
 {
         text: 'Last Chance',
         sideMedia: 'IMG_2592.png',
         arrow: true,
-        arrowPos: { left: 'auto', right: '-180px', bottom: '-40px', rotate: '0deg', translate: '' },
+        arrowPos: { left: 'auto', right: '-80px', bottom: '-30px', rotate: '5deg', translate: '' },
         replaceMain: false
       }
     ];
@@ -373,7 +373,7 @@
       
       let count = 0;
       const interval = setInterval(() => {
-        if (count >= 50) { // Stop after 50 images
+        if (count >= 20) { // Stop after 20 images
           clearInterval(interval);
           return;
         }
@@ -407,7 +407,7 @@
       
       let count = 0;
       const interval = setInterval(() => {
-        if (count >= 50) { // Stop after 50 images
+        if (count >= 20) { // Stop after 20 images
           clearInterval(interval);
           return;
         }
