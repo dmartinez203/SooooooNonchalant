@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Ask</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: radial-gradient(circle at 20% 20%, #b3d4ff 0, #77a6f7 28%, #5b7bd5 60%, #e5f0ff 100%);
+      --card: rgba(255, 255, 255, 0.85);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      --text: #2d1f26;
+      --accent: #ff4d6d;
+      --yes: #2fbf71;
+      --no: #ff3c38;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      padding: 24px;
+    }
+    .card {
+      position: relative;
+      width: auto;
+      max-width: 1600px;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 20px 10px 30px;
+      overflow: visible;
+      backdrop-filter: none;
+    }
+    .title {
+      font-family: 'Playfair Display', 'Space Grotesk', serif;
+      font-size: clamp(48px, 7vw, 64px);
+      text-align: center;
+      margin: 0 0 26px;
+      letter-spacing: -0.55px;
+    }
+    .media-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      margin: 24px 0 36px;
+      overflow: visible;
+    }
+    .media-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media {
+      width: 1000px;
+      max-width: 90vw;
+      aspect-ratio: 4 / 3;
+      border-radius: 28px;
+      object-fit: cover;
+      box-shadow: 0 22px 64px rgba(0,0,0,0.12);
+      border: 7px solid #fff3f7;
+      background: #fff3f7;
+      transition: transform 240ms ease, filter 240ms ease;
+    }
+    .side-photo-container {
+      position: absolute;
+      right: -700px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: none;
+      pointer-events: none;
+    }
+    .side-media {
+      display: block;
+      width: min(600px, 38vw);
+      aspect-ratio: 4 / 3;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+    }
+    .media.pop { transform: scale(1.01); filter: saturate(1.05); }
+    .message {
+        box-shadow: none;
+        border: none;
+        background: transparent;
+      min-height: 40px;
+    }
+    .buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    button {
+      border: none;
+      border-radius: 20px;
+      padding: 28px 52px;
+      font-size: 32px;
+      font-weight: 800;
+      cursor: pointer;
+      color: white;
+      transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+    }
+    button:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    button:active { transform: translateY(0); }
+    .yes { background: var(--yes); }
+    .no { background: var(--no); }
+    .arrow {
+      position: absolute;
+      font-size: 120px;
+      right: 14%;
+      bottom: 92px;
+      transform: rotate(-12deg);
+      opacity: 0;
+      transition: opacity 200ms ease;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+    .arrow.show { opacity: 1; }
+    .bubble {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ff4d6d;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      box-shadow: 0 14px 36px rgba(255,77,109,0.33);
+    }
+    .flood-image {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      animation: floatIn 0.5s ease forwards;
+      z-index: 1;
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .buttons {
+      position: relative;
+      z-index: 10;
+    }
+    .yay-text {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 72px;
+      font-weight: 900;
+      color: #ff4d6d;
+      text-shadow: 0 4px 20px rgba(255, 77, 109, 0.5);
+      z-index: 100;
+      animation: bounce 0.6s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+    .footer-note {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 32px !important;
+      color: #6d4b56;
+      opacity: 0.88;
+      position: relative;
+      z-index: 10;
+    }
+    @media (max-width: 520px) {
+      .card { padding: 26px 20px 30px; }
+      .arrow { right: 6%; bottom: 78px; width: 110px; }
+      .media-row { flex-wrap: wrap; }
+      .media { width: 90vw; max-width: 90vw; }
+      .side-media { width: 82vw; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 class="title">Will you be my Valentine?</h1>
+    <div class="media-wrap">
+      <div class="media-row">
+        <img id="media" class="media" src="https://media1.tenor.com/m/CGQOSjUZ6ggAAAAd/corazon-de-minion-minion.gif" alt="Valentine ask">
+      </div>
+      <div id="sidePhotoContainer" class="side-photo-container">
+        <img id="sideMedia" class="side-media" src="" alt="Side view">
+      </div>
+      <div id="arrow" class="arrow">↗️</div>
+    </div>
+    <div class="buttons">
+      <button class="yes" id="yes">Yes!</button>
+      <button class="no" id="no">No?</button>
+    </div>
+  </main>
+  <script>
+    const mediaEl = document.getElementById('media');
+    const sideMediaEl = document.getElementById('sideMedia');
+    const sidePhotoContainer = document.getElementById('sidePhotoContainer');
+    const arrowEl = document.getElementById('arrow');
+    const yesButton = document.getElementById('yes');
+    const noButton = document.getElementById('no');
+    const defaultNoLabel = 'No?';
+
+    // Edit this list to customize the sequence for "No" clicks.
+    const noResponses = [
+      {
+        text: 'Are you sure',
+        arrow: false
+      },
+      {
+        text: 'Are you sure you\'re sure?',
+        arrow: false
+      },
+      {
+        text: 'Babe please',
+        arrow: false
+      },
+      {
+        text: 'Babe pleaseeeeeeeeeeeeeeee',
+        arrow: false
+      },
+      {
+        text: 'If your goal was to hurt me, it\'s working',
+        arrow: false
+      },
+      {
+        text: 'This could be us',
+        sideMedia: 'IMG_4522.JPG',
+        arrow: true,
+        arrowPos: { left: 'auto', right: '-350px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        replaceMain: false
+      },
+      {
+        text: 'What about this?',
+        sideMedia: 'IMG_2592.png',
+        arrow: true,
+        arrowPos: { left: 'auto', right: '-350px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        replaceMain: false
+      },
+{
+        text: 'Last Chance',
+        sideMedia: 'IMG_2592.png',
+        arrow: true,
+        arrowPos: { left: 'auto', right: '-350px', bottom: '-60px', rotate: '-5deg', translate: '' },
+        replaceMain: false
+      }
+    ];
+
+    const yesState = {
+      text: 'Yay! Get ready for the best Valentine\'s Day. 💖',
+      media: 'https://media1.tenor.com/m/i55LiEyzU_AAAAAd/fireworks-elmo.gif'
+    };
+
+    let noIndex = 0;
+    let yesClickCount = 0;
+
+    function showState({ text, media, sideMedia, replaceMain = true, arrow = false, arrowPos = {} }) {
+      if (replaceMain && media) {
+        mediaEl.src = media;
+      }
+      mediaEl.alt = text;
+
+      if (sideMedia) {
+        sideMediaEl.src = sideMedia;
+        sidePhotoContainer.style.display = 'block';
+      } else {
+        sideMediaEl.src = '';
+        sidePhotoContainer.style.display = 'none';
+      }
+
+      void mediaEl.offsetWidth; // forces reflow for replaying animation
+      mediaEl.classList.add('pop');
+      arrowEl.classList.toggle('show', arrow);
+      if (arrow) {
+        const setVal = (v, fallback) => (v !== undefined && v !== 'auto' ? v : fallback);
+        const rotateVal = arrowPos.rotate || '-12deg';
+        const translateVal = arrowPos.translate || '';
+        arrowEl.style.left = arrowPos.left === 'auto' ? 'auto' : (arrowPos.left || '');
+        arrowEl.style.right = arrowPos.right === 'auto' ? 'auto' : (arrowPos.right || '14%');
+        arrowEl.style.bottom = arrowPos.bottom || '92px';
+        arrowEl.style.transform = translateVal
+          ? `${translateVal} rotate(${rotateVal})`
+          : `rotate(${rotateVal})`;
+      } else {
+        arrowEl.style.left = '';
+        arrowEl.style.right = '14%';
+        arrowEl.style.bottom = '92px';
+        arrowEl.style.transform = 'rotate(-12deg)';
+      }
+    }
+
+    document.getElementById('yes').addEventListener('click', () => {
+      showState(yesState);
+      noButton.style.display = 'none'; // Hide No button
+      document.querySelector('.title').style.display = 'none'; // Hide title
+      noButton.textContent = defaultNoLabel;
+      noButton.style.fontSize = '';
+      noButton.style.padding = '';
+      
+      // Add YAYYY!!! text
+      const yayText = document.createElement('div');
+      yayText.className = 'yay-text';
+      yayText.textContent = 'YAYYY!!!';
+      document.body.appendChild(yayText);
+      
+      // Remove all existing flood images
+      document.querySelectorAll('.flood-image').forEach(img => img.remove());
+      
+      // Start flooding with Yay pics
+      if (!window.yayFloodStarted) {
+        window.yayFloodStarted = true;
+        startYayImageFlood();
+      }
+    });
+
+    document.getElementById('no').addEventListener('click', () => {
+      const lastIndex = noResponses.length - 1;
+      const indexToUse = Math.min(noIndex, lastIndex);
+      const response = noResponses[indexToUse];
+      if (noIndex < lastIndex) {
+        noIndex += 1;
+      }
+      showState(response);
+      noButton.textContent = response.text;
+
+      // Always grow Yes button
+      yesClickCount += 1;
+      const yesFont = Math.min(24 + yesClickCount * 15);
+      const yesPadY = Math.min(20 + yesClickCount * 10);
+      const yesPadX = Math.min(38 + yesClickCount * 10);
+      yesButton.style.fontSize = `${yesFont}px`;
+      yesButton.style.padding = `${yesPadY}px ${yesPadX}px`;
+      
+      // Start flooding on last response
+      if (indexToUse === lastIndex && !window.floodStarted) {
+        window.floodStarted = true;
+        startImageFlood();
+      }
+    });
+
+    function startImageFlood() {
+      const images = [
+        'FolderOfNoPic/IMG_4161.JPG',
+        'FolderOfNoPic/IMG_4174.JPG',
+        'FolderOfNoPic/IMG_4260.JPG',
+        'FolderOfNoPic/IMG_4360.JPG',
+        'FolderOfNoPic/IMG_4414.JPG',
+        'FolderOfNoPic/IMG_9950.JPEG'
+      ];
+      
+      let count = 0;
+      const interval = setInterval(() => {
+        if (count >= 50) { // Stop after 50 images
+          clearInterval(interval);
+          return;
+        }
+        
+        const img = document.createElement('img');
+        img.className = 'flood-image';
+        img.src = images[Math.floor(Math.random() * images.length)];
+        
+        // Random position on screen
+        img.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+        
+        document.body.appendChild(img);
+        count++;
+      }, 150); // Add new image every 150ms
+    }
+
+    function startYayImageFlood() {
+      const images = [
+        'YayPics/IMG_4119.JPG',
+        'YayPics/IMG_4124.JPG',
+        'YayPics/IMG_4185.JPG',
+        'YayPics/IMG_4207.JPG',
+        'YayPics/IMG_4472.JPG',
+        'YayPics/IMG_4483.JPG',
+        'YayPics/IMG_4534.JPG',
+        'YayPics/IMG_4536.JPG',
+        'YayPics/IMG_4537.JPG',
+        'YayPics/TheDogPic.JPG'
+      ];
+      
+      let count = 0;
+      const interval = setInterval(() => {
+        if (count >= 50) { // Stop after 50 images
+          clearInterval(interval);
+          return;
+        }
+        
+        const img = document.createElement('img');
+        img.className = 'flood-image';
+        img.src = images[Math.floor(Math.random() * images.length)];
+        
+        // Random position on screen
+        img.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+        
+        document.body.appendChild(img);
+        count++;
+      }, 150); // Add new image every 150ms
+    }
+  </script>
+</body>
+</html>
